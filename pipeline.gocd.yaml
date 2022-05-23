@@ -36,8 +36,8 @@ pipelines:
             tasks:
             - exec:
                 arguments:
-                - app
-                command: cd
+                - version
+                command: docker-compose
                 run_if: passed
             - exec:
                 arguments:
