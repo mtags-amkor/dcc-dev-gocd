@@ -46,6 +46,11 @@ pipelines:
                 run_if: passed
             - exec:
                 arguments:
+                # "build dcc-web"
+                command: ls
+                run_if: passed
+            - exec:
+                arguments:
                 - --version
                 command: docker
                 run_if: passed
