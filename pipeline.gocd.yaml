@@ -1,20 +1,20 @@
 format_version: 10
 pipelines:
   dcc-dev:
-    group: GSSC
+    group: sample
     label_template: ${COUNT}
     lock_behavior: none
     display_order: -1
     materials:
-      git-383dc03:
+      git-ea6cb54:
         git: https://bitbucket.org/amkortechnology/dcc-docker.git
         username: maquino-amkor
         shallow_clone: false
         auto_update: true
         branch: master
-        encrypted_password: AES:lhZ+JJolG35zGi8HQaZeQQ==:uk7EPMfwQRjGwpyydRhjzEmm6x0PgGf9wZFlAM2DYHA=
+        encrypted_password: AES:v8shBxVHg1CeL2UM2jQeLw==:SednV86Gp49h1+ZyPQomwdOGNwucu0o3rTxerRPXtsI=
     stages:
-    - docker-build:
+    - build:
         fetch_materials: true
         keep_artifacts: false
         clean_workspace: false
@@ -22,9 +22,23 @@ pipelines:
           type: success
           allow_only_on_success: false
         jobs:
-          docker:
+          web-build:
             timeout: 0
+            environment_variables:
+              DCC_HOST: 0.0.0.0
+              DCC_APP_ENV: dev
+              DCC_WEB_PORT: '4200'
+              UM_PORT: '5005'
+              DCC_ATK_PORT: '3000'
+              DCC_ATM_PORT: '3001'
+              DCC_ATC_PORT: '3002'
+              DCC_CRON_LINK_PORT: '3100'
             tasks:
+            - exec:
+                arguments:
+                - dcc-docker
+                command: cd
+                run_if: passed
             - exec:
                 arguments:
                 - --version
