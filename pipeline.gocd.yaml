@@ -38,14 +38,10 @@ pipelines:
             tasks:
             - exec:
                 arguments:
-                - app
-                command: cd
+                #- app
+                command: cd app && pwd
                 run_if: passed
-                - exec:
-                    arguments:
-                    # "build dcc-web"
-                    command: ls
-                    run_if: passed
+                
             - exec:
                 arguments:
                 - --version
