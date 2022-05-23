@@ -36,8 +36,8 @@ pipelines:
             tasks:
             - exec:
                 arguments:
-                - build dcc-web
-                command: docker-compose
+                #- build dcc-web
+                command: docker-compose build dcc-web
                 run_if: passed
             - exec:
                 arguments:
