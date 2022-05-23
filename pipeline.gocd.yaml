@@ -33,22 +33,19 @@ pipelines:
               DCC_ATM_PORT: '3001'
               DCC_ATC_PORT: '3002'
               DCC_CRON_LINK_PORT: '3100'
+              bituser: 'maquino-amkor'
+              bittoken: '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'
             tasks:
             - exec:
                 arguments:
-                - build dcc-web
-                command: docker-compose
+                - app
+                command: cd
                 run_if: passed
-            - exec:
-                arguments:
-                # "build dcc-web"
-                command: pwd
-                run_if: passed
-            - exec:
-                arguments:
-                # "build dcc-web"
-                command: ls
-                run_if: passed
+              - exec:
+                  arguments:
+                  # "build dcc-web"
+                  command: ls
+                  run_if: passed
             - exec:
                 arguments:
                 - --version
